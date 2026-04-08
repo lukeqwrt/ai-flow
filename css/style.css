@@ -1,0 +1,53 @@
+.swiper {
+    overflow: visible;
+  }
+  
+  .swiper-slide {
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .img-style {
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  /* Your staggered layout */
+  .img-1 { width: 180px; height: 240px; transform: translateY(40px); }
+  .img-2 { width: 260px; height: 160px; }
+  .img-3 { width: 200px; height: 280px; transform: translateY(-20px); }
+  .img-4 { width: 240px; height: 160px; transform: translateY(60px); }
+  .img-5 { width: 200px; height: 260px; }
+  .img-6 { width: 180px; height: 220px; transform: translateY(-30px); }
+  
+  .badge {
+    @apply bg-gray-100 pl-[2px] pr-[10px] rounded-full text-md flex gap-1 items-center;
+    background-color: #395c2219;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee 50s linear infinite;
+  }
+  
+  .animate-marquee-reverse {
+    animation: marquee-reverse 50s linear infinite;
+  }
