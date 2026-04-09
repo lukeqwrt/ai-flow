@@ -56,6 +56,7 @@ burger.addEventListener("click", () => {
     
 const wrapper = document.querySelector("#dropdownMenu");
 const menu = document.getElementById("menuButton");
+const menu_wrapper = document.querySelector(".menu-drop-down");
 
 menu.addEventListener("mouseenter", () => {
     wrapper.classList.remove("opacity-0", "scale-95", "pointer-events-none");
@@ -63,12 +64,59 @@ menu.addEventListener("mouseenter", () => {
     desktopArrow.classList.add('rotate-180');
 });
 
-wrapper.addEventListener("mouseleave", () => {
+menu_wrapper.addEventListener("mouseleave", () => {
+    wrapper.classList.add("opacity-0", "scale-95", "pointer-events-none");
+    wrapper.classList.remove("opacity-100", "scale-100");
+    desktopArrow.classList.remove('rotate-180');
+});
+menu_wrapper.addEventListener("mouseleave", () => {
     wrapper.classList.add("opacity-0", "scale-95", "pointer-events-none");
     wrapper.classList.remove("opacity-100", "scale-100");
     desktopArrow.classList.remove('rotate-180');
 });
 
+// remove active open nav on mobile when scrolling up
+let lastScrollTop = 0;
+window.addEventListener('scroll', () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop < lastScrollTop) {
+        if(!mainHeader.classList.contains('h-[504px]') && !mainHeader.classList.contains('h-[344px]')) {
+            
+            return
+        }
+        // This code runs when scrolling UP
+        mobileMenu.classList.add("opacity-0");
+        mobileMenu.classList.add("-translate-y-4");
+        mobileMenu.classList.add("pointer-events-none");
+    
+        mainHeader.classList.remove("h-[512px]");
+        mobileProductsContent.classList.remove('h-[160px]');
+        mobileProductsContent.classList.add('opacity-0');
+        mobileProductsContent.classList.remove('mt-4');
+        mobileProductsContent.classList.remove('mb-2');
+        mobileArrow.classList.remove('rotate-180');
+        // mobileMenu.classList.toggle("delay-300");
+        line1.classList.remove("rotate-45");
+        line1.classList.remove("translate-y-[10px]");
+    
+        line2.classList.remove("opacity-0");
+    
+        line3.classList.remove("-rotate-45");
+        line3.classList.remove("-translate-y-[6px]");
+        if (mainHeader.classList.contains('h-[504px]')) {
+            mainHeader.classList.remove("h-[344px]");
+            mainHeader.classList.remove("h-[504px]");
+            mobileProductsContent.classList.remove('h-[144px]');
+            mobileProductsContent.classList.add('h-0');
+            return
+        }
+        mainHeader.classList.remove("h-[344px]");
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}, {passive: true}) 
+
+// floating cta
 const cta = document.getElementById("floatingCta");
 const trigger = document.getElementById("triggerSection");
 const footer = document.getElementById("footer");
